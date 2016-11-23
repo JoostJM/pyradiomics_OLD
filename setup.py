@@ -10,6 +10,11 @@ from setuptools import setup, Extension
 with open('requirements.txt', 'r') as fp:
   requirements = list(filter(bool, (line.strip() for line in fp)))
 
+with open('requirements-dev.txt', 'r') as fp:
+  dev_requirements = list(filter(bool, (line.strip() for line in fp)))
+
+setup_requires = []
+
 incDirs = [sysconfig.get_python_inc(), numpy.get_include()]
 setup(
     name='pyradiomics',
@@ -51,6 +56,7 @@ setup(
 
     keywords='radiomics cancerimaging medicalresearch',
 
-    setup_requires=['cython', 'numpy>=1.11.0'],
-    install_requires=requirements
+    install_requires=requirements,
+    setup_requires=setup_requires,
+    tests_require=dev_requirements,
 )
